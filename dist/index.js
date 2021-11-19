@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("moment"));
+		module.exports = factory();
 	else if(typeof define === 'function' && define.amd)
-		define(["moment"], factory);
+		define([], factory);
 	else if(typeof exports === 'object')
-		exports["vue-table-component"] = factory(require("moment"));
+		exports["vue-table-component"] = factory();
 	else
-		root["vue-table-component"] = factory(root["moment"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_139__) {
+		root["vue-table-component"] = factory();
+})(this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -2226,20 +2226,20 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
     if (true) {
-        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(27), __webpack_require__(28), __webpack_require__(139), __webpack_require__(19)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(27), __webpack_require__(28), __webpack_require__(19)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
     } else if (typeof exports !== "undefined") {
-        factory(exports, require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('moment'), require('../helpers'));
+        factory(exports, require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('../helpers'));
     } else {
         var mod = {
             exports: {}
         };
-        factory(mod.exports, global.classCallCheck, global.createClass, global.moment, global.helpers);
+        factory(mod.exports, global.classCallCheck, global.createClass, global.helpers);
         global.Row = mod.exports;
     }
-})(this, function (exports, _classCallCheck2, _createClass2, _moment, _helpers) {
+})(this, function (exports, _classCallCheck2, _createClass2, _helpers) {
     'use strict';
 
     Object.defineProperty(exports, "__esModule", {
@@ -2249,8 +2249,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
     var _createClass3 = _interopRequireDefault(_createClass2);
-
-    var _moment2 = _interopRequireDefault(_moment);
 
     function _interopRequireDefault(obj) {
         return obj && obj.__esModule ? obj : {
@@ -2305,15 +2303,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                 }
 
                 if (dataType.startsWith('date')) {
-                    var format = dataType.replace('date:', '');
+                    if (value.getTime) {
+                        return value.getTime();
+                    }
 
-                    console.dir('---- table');
-                    console.dir(value);
-                    console.dir(format);
-
-                    var v = (0, _moment2.default)(value, format).format('YYYYMMDDHHmmss');
-                    console.dir(v);
-                    return v;
+                    return null;
                 }
 
                 if (dataType === 'numeric') {
@@ -5116,12 +5110,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("\n    " + _vm._s(_vm.label) + "\n")]) : _vm._e()
 },staticRenderFns: []}
-
-/***/ }),
-/* 139 */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_139__;
 
 /***/ })
 /******/ ]);

@@ -18,7 +18,7 @@ module.exports = merge(require('./webpack.base'), {
     },
 
     externals: [
-        'moment', 'vue',
+        'vue',
     ],
 
     plugins: [

@@ -1,4 +1,3 @@
-import moment from 'moment';
 import { get } from '../helpers';
 
 export default class Row {
@@ -39,15 +38,11 @@ export default class Row {
         }
 
         if (dataType.startsWith('date')) {
-            const format  = dataType.replace('date:', '');
+            if (value.getTime) {
+                return value.getTime();
+            }
 
-            console.dir('---- table')
-            console.dir(value);
-            console.dir(format);
-
-            const v =  moment(value, format).format('YYYYMMDDHHmmss');
-            console.dir(v)
-            return v;
+            return null;
         }
 
         if (dataType === 'numeric') {
