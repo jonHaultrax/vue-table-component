@@ -1,4 +1,5 @@
-import { get } from "../helpers";
+import moment from 'moment';
+import { get } from '../helpers';
 
 export default class Row {
     constructor(data, columns) {
@@ -11,14 +12,14 @@ export default class Row {
     }
 
     getColumn(columnName) {
-        return this.columns.find((column) => column.show === columnName);
+        return this.columns.find(column => column.show === columnName);
     }
 
     getFilterableValue(columnName) {
         const value = this.getValue(columnName);
 
-        if (!value) {
-            return "";
+        if (! value) {
+            return '';
         }
 
         return value.toString().toLowerCase();
@@ -30,23 +31,26 @@ export default class Row {
         let value = this.getValue(columnName);
 
         if (value === undefined || value === null) {
-            return "";
+            return '';
         }
 
         if (value instanceof String) {
             value = value.toLowerCase();
         }
 
-        if (dataType.startsWith("date")) {
-            const format = dataType.replace("date:", "");
-            console.dir('---- table component')
+        if (dataType.startsWith('date')) {
+            const format  = dataType.replace('date:', '');
+
+            console.dir('---- table')
             console.dir(value);
             console.dir(format);
 
-            return moment(value, format).format("YYYYMMDDHHmmss");
+            const v =  moment(value, format).format('YYYYMMDDHHmmss');
+            console.dir(v)
+            return v;
         }
 
-        if (dataType === "numeric") {
+        if (dataType === 'numeric') {
             return value;
         }
 
@@ -55,13 +59,9 @@ export default class Row {
 
     passesFilter(filter) {
         return this.columns
-            .filter((column) => column.isFilterable())
-            .map((column) =>
-                this.getFilterableValue(column.getFilterFieldName())
-            )
-            .filter(
-                (filterableValue) =>
-                    filterableValue.indexOf(filter.toLowerCase()) >= 0
-            ).length;
+            .filter(column => column.isFilterable())
+            .map(column => this.getFilterableValue(column.getFilterFieldName()))
+            .filter(filterableValue => filterableValue.indexOf(filter.toLowerCase()) >= 0)
+            .length;
     }
 }
